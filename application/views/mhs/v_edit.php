@@ -27,6 +27,20 @@
                         </div>
 
                         <div class="form-group">
+                <label for="prodi_id" class="control-label col-sm-4">Pilih Prodi:</label>
+                <div class="col-sm-4">
+                    <select name="prodi_id" id="prodi_id" class="form-control">
+                        <option value="" disabled selected>Pilih Prodi</option>
+                        <?php foreach ($prodi_list as $prodi): ?>
+                            <option value="<?php echo $prodi['id_prodi']; ?>" <?php echo ($data['prodi_id'] == $prodi['id_prodi']) ? 'selected' : ''; ?>>
+                                <?php echo $prodi['nama_prodi']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+                  
+                        <div class="form-group">
                             <label for="angkatan" class="control-label col-sm-4">Angkatan:</label>
                             <div class="col-sm-2">
                                 <input required class="form-control" name="angkatan" type="text" inputmode="numeric" id="angkatan" value="<?= $data['angkatan'] ?>" placeholder="Tahun Masuk" />
@@ -36,9 +50,10 @@
                         <div class="form-group">
                             <label for="lahir" class="control-label col-sm-4">Tanggal Lahir:</label>
                             <div class="col-sm-2">
-                                <input required class="form-control" name="lahir" type="date" id="lahir" value="<?= $data['lahir_mhs'] ?>" placeholder="Isi Tanggal Lahir" />
+                                <input required class="form-control" name="lahir" type="date" id="lahir" placeholder="Isi Tanggal Lahir" />
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <label for="kelamin" class="control-label col-sm-4">Jenis Kelamin:</label>

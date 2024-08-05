@@ -2,7 +2,6 @@
 
 
 <div class="container-fluid">
-
 <h1 class="text-primary"><?php echo $judul ?></h1>
 <?php echo $this->session->flashdata('notif'); ?>
 <div class="row">
