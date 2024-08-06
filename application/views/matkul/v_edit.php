@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="angkatan" class="control-label col-sm-4">SKS :</label>
                             <div class="col-sm-2">
-                                <input required class="form-control" name="jumlah" type="number" id="jumlah" value="<?= $data['sks_mk'] ?>" placeholder="SKS" />
+                                <input required class="form-control" name="jumlah" type="text" idmode="numeric" id="jumlah" value="<?= $data['sks_mk'] ?>" placeholder="SKS" />
                             </div>
                         </div>
 
@@ -35,7 +35,7 @@
                             <label for="jenis" class="control-label col-sm-4">Jenis MK :</label>
                             <div class="col-sm-2">
                                 <select required class="form-control" name="jenis" id="jenis">
-                                    <option value="" disabled <?php echo empty($data['jenis_mk']) ? 'selected' : ''; ?>>-->Jenis Matkul<--</option>
+                                    <option value="" disabled <?php echo empty($data['jenis_mk']) ? 'selected' : ''; ?>>Jenis Matkul</option>
                                     <option value="wajib" <?php echo set_select('jenis', 'wajib', $data['jenis_mk'] == 'wajib'); ?>>Wajib</option>
                                     <option value="pilihan" <?php echo set_select('jenis', 'pilihan', $data['jenis_mk'] == 'pilihan'); ?>>Pilihan</option>
                                     <option value="khusus" <?php echo set_select('jenis', 'khusus', $data['jenis_mk'] == 'khusus'); ?>>Khusus</option>
@@ -47,7 +47,7 @@
                             <label for="semester" class="control-label col-sm-4">Semester :</label>
                             <div class="col-sm-2">
                                 <select required class="form-control" name="semester" id="semester">
-                                    <option value="" disabled <?php echo empty($data['semester']) ? 'selected' : ''; ?>>-->Pilih semester<--</option>
+                                    <option value="" disabled <?php echo empty($data['semester']) ? 'selected' : ''; ?>>Pilih semester</option>
                                     <option value="I" <?php echo set_select('semester', 'I', $data['semester_mk'] == 'I'); ?>>I</option>
                                     <option value="II" <?php echo set_select('semester', 'II', $data['semester_mk'] == 'II'); ?>>II</option>
                                     <option value="III" <?php echo set_select('semester', 'III', $data['semester_mk'] == 'III'); ?>>III</option>
