@@ -16,12 +16,18 @@ class Prodi extends CI_Controller {
 	
 	public function tambah()
 	{
-		$this->data['judul'] = "Tambah Dosen";
-		$this->data['judul1'] = "Form Tambah Dosen";
-		$this->data['action'] = 'dosen/tambah_aksi';
+		$this->data['judul'] = "Tambah Prodi";
+		$this->data['judul1'] = "Form Tambah Prodi";
+		$this->data['action'] = 'prodi/tambah_aksi';
 		$this->data['header_class'] = 'text-success';
 		$this->data['panel_class'] = 'panel-success';
         $this->data['btn_class'] = 'btn-success';
+		$this->data['fakultas_list'] = $this->db->distinct()
+                                            ->select('fakultas')
+                                            ->from('m_prodi')
+                                            ->order_by('fakultas')
+                                            ->get()
+                                            ->result_array();
 		$this->data['data'] = [
 			'id_prodi'=> null,
 			'nama_prodi'=> null,
@@ -53,9 +59,9 @@ class Prodi extends CI_Controller {
 
 	public function ubah($id)
 	{
-		$this->data['judul'] = "Ubah Dosen";
-		$this->data['judul1'] = "Form Ubah Dosen";
-		$this->data['action'] = 'dosen/ubah_aksi/'.$id;
+		$this->data['judul'] = "Ubah Prodi";
+		$this->data['judul1'] = "Form Ubah Prodi";
+		$this->data['action'] = 'prodi/ubah_aksi/'.$id;
 		$this->data['panel_class'] = 'panel-warning';
    		$this->data['btn_class'] = 'btn-success';
     	$this->data['header_class'] = 'text-warning';
@@ -65,32 +71,33 @@ class Prodi extends CI_Controller {
 
 	public function ubah_aksi($id)
 	{
-		$data['nama_dosen'] = $this->input->post('nama');
-		$data['nidn'] = $this->input->post('nidn');
-		$data['telepon_dosen'] = $this->input->post('telepon');
-		$data['alamat_dosen'] = $this->input->post('alamat');
+		$data['nama_prodi'] = $this->input->post('nama');
+		$data['kode_prodi'] = $this->input->post('kode');
+		$data['fakultas'] = $this->input->post('fakultas');
+		$data['ketua_prodi'] = $this->input->post('ketua');
 		// $check = $this->db->get_where('m_dosen', array('nidn'=> $data['nidn']))->row_array(); // dari pak galih
-		$this->db->where('nidn', $data['nidn']); //Modifikasi dari chat gpt
-		$this->db->where('id_dosen !=', $id); //Modifikasi dari chat gpt
-		$check = $this->db->get('m_dosen')->row_array(); //Modifikasi dari chat gpt
+		$this->db->where('kode_prodi', $data['kode_prodi']); //Modifikasi dari chat gpt
+		$this->db->where('id_prodi !=', $id); //Modifikasi dari chat gpt
+		$check = $this->db->get('m_prodi')->row_array(); //Modifikasi dari chat gpt
 		if (!empty($check)) {
-			$this->session->set_flashdata('notif', notif('danger', 'Kesalahan', 'NIDN sudah ada'));
-			redirect('dosen/ubah/' . $id);
+			$this->session->set_flashdata('notif', notif('danger', 'Kesalahan', 'Kode Prodi sudah ada'));
+			redirect('prodi/ubah/' . $id);
 		}
-		$query = $this->db->where(array('id_dosen'=> $id))->update('m_dosen', $data);
+		$query = $this->db->where(array('id_prodi'=> $id))->update('m_prodi', $data);
 		if ($this->db->affected_rows() > 0 ) {		
 		$this->session->set_flashdata('notif', notif('success', 'Peringatan', 'Data Berhasil diubah'));
-			redirect('dosen');
+			redirect('prodi');
 		}else{
 			$this->session->set_flashdata('notif', notif('warning', 'Kesalahan', 'Gagal, Data Belum diubah'));
-			redirect('dosen/ubah/'. $id);
+			redirect('prodi/ubah/'. $id);
 		}
 	}
 	public function hapus($id)
 	{
-		$query = $this->db->where(array('id_dosen'=> $id))->delete('m_dosen');
+		$query = $this->db->where(array('id_prodi'=> $id))->delete('m_prodi');
 		if ($this->db->affected_rows() > 0 ) {
-			redirect('dosen');
+			$this->session->set_flashdata('notif', notif('success', 'Berhasil', 'Prodi Berhasil di hapus'));
+			redirect('prodi');
 		}else{
 			redirect();
 		}
