@@ -12,6 +12,7 @@
                     <a class="btn btn-primary" href="<?= site_url('dosen') ?>">DOSEN</a>
                     <a class="btn btn-primary" href="<?= site_url('matkul') ?>">MATA KULIAH</a>
                     <a class="btn btn-primary" href="<?= site_url('krs') ?>">KRS</a>
+                    <a class="btn btn-primary" href="<?= site_url('prodi') ?>">PRODI</a>
                     <hr><br>
                     <img src="<?= base_url('assets/bg.png') ?>" alt="Background Image" class="img img-responsive">
                 </div>
