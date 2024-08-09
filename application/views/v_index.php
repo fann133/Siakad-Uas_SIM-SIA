@@ -59,8 +59,8 @@
                         <ul class="dropdown-menu pull-left"> <!-- Menambahkan kelas pull-left -->
                             <li><a href="<?= site_url('mahasiswa') ?>"><i class="fa fa-graduation-cap"></i> MAHASISWA</a></li>
                             <li><a href="<?= site_url('dosen') ?>"><i class="fa fa-chalkboard-teacher"></i> DOSEN</a></li>
-                            <li><a href="<?= site_url('matkul') ?>"><i class="fa fa-book"></i> MATA KULIAH</a></li>
                             <li><a href="<?= site_url('prodi') ?>"><i class="fa fa-list-alt"></i> PRODI</a></li>
+                            <li><a href="<?= site_url('matkul') ?>"><i class="fa fa-book"></i> MATA KULIAH</a></li>
                             <li><a href="<?= site_url('krs') ?>"><i class="fa fa-edit"></i> KRS</a></li>
                         </ul>
                     </div>
