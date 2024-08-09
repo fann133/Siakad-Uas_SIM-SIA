@@ -8,7 +8,6 @@ class Mahasiswa extends CI_Controller {
         $this->load->model('Prodi_model');
         $this->load->library('form_validation');
     }
-
     public function index()
     {
         // Ambil kata kunci dari form pencarian
