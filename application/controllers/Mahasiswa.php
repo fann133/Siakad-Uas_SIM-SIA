@@ -11,16 +11,37 @@ class Mahasiswa extends CI_Controller {
 
     public function index()
     {
+        // Ambil kata kunci dari form pencarian
+        $keyword = $this->input->get('keyword');
+        
+        // Jika ada kata kunci, tambahkan filter untuk pencarian berdasarkan NIM, Nama Mahasiswa, Nama Program Studi, atau Jenis Kelamin
+        if ($keyword) {
+            $this->db->group_start(); // Memulai grup kondisi
+            $this->db->like('m_mhs.nim', $keyword); // Pencarian berdasarkan NIM
+            $this->db->or_like('m_mhs.nama_mhs', $keyword); // Pencarian berdasarkan Nama Mahasiswa
+            $this->db->or_like('m_prodi.nama_prodi', $keyword); // Pencarian berdasarkan Nama Program Studi
+            $this->db->or_like('m_mhs.angkatan', $keyword); // Pencarian berdasarkan Angkatan
+            $this->db->or_like('m_mhs.kelamin_mhs', $keyword); // Pencarian berdasarkan Jenis Kelamin
+            $this->db->or_like('m_mhs.agama_mhs', $keyword); // Pencarian berdasarkan Agama
+            $this->db->group_end(); // Mengakhiri grup kondisi
+        }
+    
+        // Filter dan limit (dapat disesuaikan)
         $filter = null;
         $limit = null;
+    
+        // Pengaturan judul
         $this->data['judul'] = "Mahasiswa";
         $this->data['judul1'] = "Data Mahasiswa";
-        $this->data['listdata'] = $this->db->order_by('nim', 'ASC')
+    
+        // Mendapatkan data dari database
+        $this->data['listdata'] = $this->db->order_by('m_mhs.nim', 'ASC')
             ->join('m_prodi', 'm_prodi.id_prodi = m_mhs.prodi_id', 'left')
             ->get_where('m_mhs', $filter, $limit)->result_array();
+    
+        // Load view dengan data yang sudah difilter
         $this->load->view('mhs/v_index', $this->data);
-    }
-
+    }    
 	public function tambah()
 	{
 		$this->data['judul'] = "Tambah Mahasiswa";
@@ -119,6 +140,7 @@ class Mahasiswa extends CI_Controller {
     {
         $query = $this->db->where(array('id_mhs' => $id))->delete('m_mhs');
         if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('notif', notif('success', 'Berhasil', 'Data Berhasil dihapus'));
             redirect('mahasiswa');
         } else {
             redirect();
